@@ -17,8 +17,10 @@ public interface Page {
 
     String input(int minChar, String msg);
 
-    void err(String str);
+    <T> void err(T str);
+     void err();
 
-    void success(String str);
+    <T>    void success(T str);
+     void success();
 
 }

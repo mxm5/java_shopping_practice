@@ -6,39 +6,40 @@ public abstract class BasePage implements Page {
 
     private String name;
     protected String[] options;
+
     protected abstract void run();
 
-    public BasePage( ){
+    public BasePage() {
         String[] split = getClass().getName().toUpperCase().split("\\.");
-        this.name = split[split.length-1] ;
+        this.name = split[split.length - 1];
         showTitle();
         run();
 
     }
 
-   public BasePage(String name){
+    public BasePage(String name) {
         this.name = name;
         showTitle();
         run();
 
     }
-    public BasePage(String name,String[] options){
+
+    public BasePage(String name, String[] options) {
         this.name = name;
         showTitle();
-        this.options =options;
+        this.options = options;
         showOptions(options);
         run();
 
     }
 
 
-
     @Override
     public void showTitle() {
         print("_".repeat(100));
-        int x = name.length()/2;
-        x = 50-x;
-        print("||"+" ".repeat(x)+name+" ".repeat(x-4)+"||");
+        int x = name.length() / 2;
+        x = 50 - x;
+        print("||" + " ".repeat(x) + name + " ".repeat(x - 4) + "||");
         print("_".repeat(100));
     }
 
@@ -49,18 +50,18 @@ public abstract class BasePage implements Page {
 
     @Override
     public void showOptions(String[] names) {
-        int k =0;
-        if(names!= null)
-        for(String n: names){
-            print(++k+"\t"+n);
-        }
+        int k = 0;
+        if (names != null)
+            for (String n : names) {
+                print(++k + "\t" + n);
+            }
     }
 
     @Override
     public int input(int max) {
         int select;
         print("select an action value");
-        while (true){
+        while (true) {
             System.out.print(" : ");
             try {
                 select = new Scanner(System.in).nextInt();
@@ -68,7 +69,7 @@ public abstract class BasePage implements Page {
                     print("select an action from 1 to " + max);
                 else
                     break;
-            } catch (Exception e ){
+            } catch (Exception e) {
                 print("please insert a valid number");
             }
         }
@@ -82,18 +83,18 @@ public abstract class BasePage implements Page {
 
     @Override
     public String input(String msg) {
-        System.out.print(msg+" : ");
+        System.out.print(msg + " : ");
         return new Scanner(System.in).next();
     }
 
     @Override
     public String input(int minChar, String msg) {
-        System.out.print(msg+" : ");
+        System.out.print(msg + " : ");
         String inp;
         while (true) {
             inp = new Scanner(System.in).next();
-            if (inp.length()<minChar)
-                print("at least insert "+minChar+" characters");
+            if (inp.length() < minChar)
+                print("at least insert " + minChar + " characters");
             else
                 break;
         }
@@ -101,13 +102,24 @@ public abstract class BasePage implements Page {
     }
 
     @Override
-    public void err(String str) {
-        print("-".repeat(10)+ " FAILED " + "-".repeat(10));
+    public <S> void err(S str) {
+        print("-".repeat(10) + " FAILED " + str.toString() + "-".repeat(10));
     }
 
     @Override
-    public void success(String str) {
-        print("-".repeat(10)+ " SUCCESSFUL " + "-".repeat(10));
+    public void err() {
+        print("-".repeat(10) + " FAILED " + "-".repeat(10));
+    }
+
+    @Override
+    public <S> void success(S str) {
+        print("-".repeat(10) + " SUCCESSFUL " + str.toString() + "-".repeat(10));
+
+    }
+
+    @Override
+    public void success() {
+        print("-".repeat(10) + " SUCCESSFUL " + "-".repeat(10));
 
     }
 
@@ -115,12 +127,13 @@ public abstract class BasePage implements Page {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getName() {
         return name;
     }
 
 
-    String enterPass(int min){
-       return input(min,"enter your password");
+    String enterPass(int min) {
+        return input(min, "enter your password");
     }
 }

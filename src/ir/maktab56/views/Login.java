@@ -16,15 +16,18 @@ public class Login extends BasePage {
         String userName = input(4, "enter your user name");
         String pass = input(8, "enter your password");
         User loggedInUser = new User(userName, pass);
-        if (readUser(loggedInUser))
+        if (readUser(loggedInUser)) {
+            success();
             new Products();
-        else
+        } else {
+            err();
             new Home();
+        }
     }
 
     private boolean readUser(User user) {
 
-       return null!=service.read(user);
+        return null != service.read(user);
 
     }
 }
