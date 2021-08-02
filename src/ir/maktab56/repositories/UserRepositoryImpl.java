@@ -12,11 +12,12 @@ public class UserRepositoryImpl extends BaseRepository<User, Long> implements Us
 
     public UserRepositoryImpl(Connection connection) {
         super(connection);
-
+        createTable();
     }
 
     @Override
     protected void createTable() {
+
         String sql = "CREATE TABLE IF NOT EXISTS `shopping_app`.`users` (\n" +
                 "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
                 "  `firstName` VARCHAR(100) NOT NULL,\n" +
@@ -38,18 +39,32 @@ public class UserRepositoryImpl extends BaseRepository<User, Long> implements Us
 
 
     @Override
+    public ResultSet basicQuery(String sql) {
+        return super.basicQuery(sql);
+    }
+
+    @Override
     public User read(User user) {
 
-//        try {
-//            ResultSet r = connection.createStatement().executeQuery("show tables");
-//            System.out.println(r);
-//            System.out.println("tables");
-//            while (r.next()) {
-//                System.out.println(r.getString(1));
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-        return super.read(user);
+        try {
+            ResultSet r = basicQuery("SELECT * FROM shopping_app.users WHERE userName = \"" +
+                    user.getUsrName() +
+                    "\" AND pass = \"" + user.getPass() + "\";");
+
+
+            if (r.next()) {
+                return new User(
+                        r.getString("firstName"),
+                        r.getString("lastName"),
+                        r.getString("userName"),
+                        r.getString("phoneNumber"),
+                        r.getString("pass"),
+                        r.getLong("id")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

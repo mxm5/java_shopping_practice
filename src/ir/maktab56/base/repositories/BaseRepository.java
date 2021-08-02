@@ -3,6 +3,7 @@ package ir.maktab56.base.repositories;
 import ir.maktab56.base.models.BaseEntity;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public abstract class BaseRepository<E extends BaseEntity<ID>, ID> implements Repository<E, ID> {
@@ -18,6 +19,17 @@ public abstract class BaseRepository<E extends BaseEntity<ID>, ID> implements Re
 
     protected abstract void createTable();
 
+
+    @Override
+    public ResultSet basicQuery(String sql) {
+        ResultSet resultSet = null;
+        try {
+            resultSet=connection.createStatement().executeQuery(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
 
     @Override
     public E read(E e) {

@@ -8,7 +8,7 @@ import ir.maktab56.services.UserService;
 
 public class Login extends BasePage {
 
-    private final UserService service = new UserService(new UserRepositoryImpl(App.connection));
+    private static final UserService service = new UserService(new UserRepositoryImpl(App.connection));
 
     @Override
     protected void run() {
@@ -23,8 +23,8 @@ public class Login extends BasePage {
     }
 
     private boolean readUser(User user) {
-        boolean isValid = false;
 
-        return isValid;
+       return null!=service.read(user);
+
     }
 }

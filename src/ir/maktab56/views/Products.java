@@ -6,6 +6,6 @@ public class Products extends BasePage {
 
     @Override
     protected void run() {
-
+        print("welcome to products");
     }
 }

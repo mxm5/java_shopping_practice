@@ -3,7 +3,7 @@ package ir.maktab56.base.views;
 public interface Page {
     void showTitle();
 
-   <T> void showList(
+    <T> void showList(
             T[] list
     );
 
@@ -17,5 +17,8 @@ public interface Page {
 
     String input(int minChar, String msg);
 
+    void err(String str);
+
+    void success(String str);
 
 }

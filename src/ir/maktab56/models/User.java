@@ -22,11 +22,13 @@ public class User extends BaseEntity<Long> {
 
     public User(String firstName,
                 String lastName,
+                String usrName,
                 String phoneNumber,
                 String pass,
                 Long id) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.usrName = usrName;
         this.phoneNumber = phoneNumber;
         this.pass = pass;
         setId(id);

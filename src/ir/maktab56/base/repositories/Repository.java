@@ -1,15 +1,15 @@
 package ir.maktab56.base.repositories;
 
 import ir.maktab56.base.models.BaseEntity;
-import ir.maktab56.base.models.Entity;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public interface Repository <E extends BaseEntity<ID>,ID>{
 
 
 
-
+    ResultSet basicQuery(String sql);
 
     E read(E e) throws SQLException;
 
