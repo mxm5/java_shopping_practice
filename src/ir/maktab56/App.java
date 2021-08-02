@@ -1,7 +1,5 @@
 package ir.maktab56;
 
-import ir.maktab56.models.User;
-import ir.maktab56.repositories.UserRepositoryImpl;
 import ir.maktab56.views.Home;
 
 import java.sql.*;

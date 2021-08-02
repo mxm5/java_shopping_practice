@@ -3,12 +3,12 @@ package ir.maktab56.views;
 import ir.maktab56.App;
 import ir.maktab56.base.views.BasePage;
 import ir.maktab56.models.User;
-import ir.maktab56.repositories.UserRepositoryImpl;
+import ir.maktab56.repositories.UserRepository;
 import ir.maktab56.services.UserService;
 
 public class Login extends BasePage {
 
-    private static final UserService service = new UserService(new UserRepositoryImpl(App.connection));
+    private static final UserService service = new UserService(new UserRepository(App.connection));
 
     @Override
     protected void run() {

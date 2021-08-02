@@ -1,7 +1,6 @@
 package ir.maktab56.models;
 
 import ir.maktab56.base.models.BaseEntity;
-import ir.maktab56.repositories.UserRepository;
 
 public class User extends BaseEntity<Long> {
     private String firstName;
