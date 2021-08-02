@@ -5,17 +5,22 @@ import ir.maktab56.base.models.BaseEntity;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class BaseRepository<E extends BaseEntity<ID>, ID> implements Repository<E,ID>{
-
+public abstract class BaseRepository<E extends BaseEntity<ID>, ID> implements Repository<E, ID> {
 
 
     protected final Connection connection;
 
     public BaseRepository(Connection connection) {
         this.connection = connection;
+        createTable();
     }
+
+
+    protected abstract void createTable();
+
+
     @Override
-    public E read(E e)  {
+    public E read(E e) {
         return null;
     }
 

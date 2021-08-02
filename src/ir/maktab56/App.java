@@ -2,6 +2,7 @@ package ir.maktab56;
 
 import ir.maktab56.models.User;
 import ir.maktab56.repositories.UserRepositoryImpl;
+import ir.maktab56.views.Home;
 
 import java.sql.*;
 
@@ -42,7 +43,7 @@ public class App {
 
     public static void main(String[] args) {
         initConnection();
+        new Home();
 
-        new UserRepositoryImpl(App.connection).read(new User());
     }
 }
