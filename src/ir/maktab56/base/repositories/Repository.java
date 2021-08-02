@@ -3,9 +3,11 @@ package ir.maktab56.base.repositories;
 import ir.maktab56.base.models.BaseEntity;
 import ir.maktab56.base.models.Entity;
 
+import java.sql.SQLException;
+
 public interface Repository <E extends BaseEntity<ID>,ID>{
 
-    E read(E e);
+    E read(E e) throws SQLException;
 
     E save(E e);
 

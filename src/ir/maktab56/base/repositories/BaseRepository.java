@@ -2,9 +2,20 @@ package ir.maktab56.base.repositories;
 
 import ir.maktab56.base.models.BaseEntity;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 public class BaseRepository<E extends BaseEntity<ID>, ID> implements Repository<E,ID>{
+
+
+
+    protected final Connection connection;
+
+    public BaseRepository(Connection connection) {
+        this.connection = connection;
+    }
     @Override
-    public E read(E e) {
+    public E read(E e)  {
         return null;
     }
 
