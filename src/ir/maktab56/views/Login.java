@@ -10,20 +10,22 @@ public class Login extends BasePage {
 
     private static final UserService service = new UserService(new UserRepository(App.connection));
 
-    public Login(){
+    public Login() {
         defaultInit();
     }
 
     private User foundUser;
+
     @Override
     protected void run() {
 
         String userName = input(4, "enter your user name");
         String pass = input(4, "enter your password");
         User loggedInUser = new User(userName, pass);
-         foundUser = readUser(loggedInUser);
+        foundUser = readUser(loggedInUser);
         if (foundUser != null) {
             success();
+            UserService.currentUser = foundUser;
             new Products(foundUser);
         } else {
             err();
@@ -33,7 +35,7 @@ public class Login extends BasePage {
 
     private User readUser(User user) {
 
-        return  service.read(user);
+        return service.read(user);
 
     }
 }

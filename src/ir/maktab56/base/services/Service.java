@@ -1,13 +1,12 @@
 package ir.maktab56.base.services;
 
 import ir.maktab56.base.models.Entity;
-import ir.maktab56.base.repositories.Repository;
 
 public interface Service<E extends Entity<ID>, ID> {
 
     E read(E e);
 
-    E save(E e);
+    boolean save(E e);
 
     E update(E e);
 

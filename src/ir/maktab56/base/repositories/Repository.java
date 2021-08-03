@@ -7,13 +7,13 @@ import java.sql.SQLException;
 
 public interface Repository <E extends BaseEntity<ID>,ID>{
 
-
+    boolean basicUpdate(String sql);
 
     ResultSet basicQuery(String sql);
 
     E read(E e) throws SQLException;
 
-    E save(E e);
+    boolean save(E e);
 
     E update(E e);
 

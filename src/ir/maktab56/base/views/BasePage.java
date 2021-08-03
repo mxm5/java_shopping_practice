@@ -81,8 +81,26 @@ public abstract class BasePage implements Page {
             }
     }
 
+    public  int inputSelector(int max, String msg){
+        int select;
+        print(msg);
+        while (true) {
+            System.out.print(" : ");
+            try {
+                select = new Scanner(System.in).nextInt();
+                if (select > max || select < 1)
+                    print("select an action from 1 to " + max);
+                else
+                    break;
+            } catch (Exception e) {
+                print("please insert a valid number");
+            }
+        }
+        return select;
+    }
+
     @Override
-    public int input(int max) {
+    public int input( int max) {
         int select;
         print("select an action value");
         while (true) {

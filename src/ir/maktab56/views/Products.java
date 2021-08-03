@@ -9,13 +9,10 @@ import ir.maktab56.repositories.UserRepository;
 import ir.maktab56.services.ProductService;
 import ir.maktab56.services.UserService;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Products extends BasePage {
     private final User user;
-    private static final ProductService service = new ProductService(new ProductRepository(App.connection));
+    private static final ProductService productService = new ProductService(new ProductRepository(App.connection));
+    private static final UserService userService = new UserService(new UserRepository(App.connection));
 
     public Products(User user) {
         this.user = user;
@@ -31,9 +28,10 @@ public class Products extends BasePage {
         print(" ".repeat(10) + user.getFirstName() + " " + user.getLastName());
         print("list of products ");
         line();
-
-        for (Product product: service.readAll()){
-
+        int k =0;
+        Product[] allProducts = productService.readAll();
+        for (Product product: allProducts){
+            print("\t\t Number"+ ++k);
             print("\t\t id :"+product.getId());
             print("\t\t name :"+product.getProductName());
             print("\t\t description :"+product.getDescription());
@@ -42,6 +40,16 @@ public class Products extends BasePage {
             print("\t\t stock :"+product.getAmount());
 
             line();
+        }
+
+        while (true) {
+                if(input("select a product number to order [y to select]").equalsIgnoreCase("y")) {
+                    int select = inputSelector(k, "select an item by its number");
+                    Product selectedProduct = allProducts[select - 1];
+                    print(" you selected product");
+                    UserService.currentUser = user;
+                    userService.addItemToCart(selectedProduct);
+                }else break;
         }
 
 

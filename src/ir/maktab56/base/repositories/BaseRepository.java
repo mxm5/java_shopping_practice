@@ -19,6 +19,16 @@ public abstract class BaseRepository<E extends BaseEntity<ID>, ID> implements Re
 
     protected abstract void createTable();
 
+    @Override
+    public boolean basicUpdate(String sql) {
+        try {
+            int res = connection.createStatement().executeUpdate(sql);
+            return res!=0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     @Override
     public ResultSet basicQuery(String sql) {
@@ -37,8 +47,8 @@ public abstract class BaseRepository<E extends BaseEntity<ID>, ID> implements Re
     }
 
     @Override
-    public E save(E e) {
-        return null;
+    public boolean save(E e) {
+        return false;
     }
 
     @Override

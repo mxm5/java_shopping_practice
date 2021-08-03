@@ -18,7 +18,7 @@ public class BaseService <E extends BaseEntity<ID>,ID , R extends BaseRepository
     }
 
     @Override
-    public E save(E e) {
+    public boolean save(E e) {
         return repository.save(e);
     }
 
