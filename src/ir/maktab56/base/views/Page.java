@@ -23,4 +23,7 @@ public interface Page {
     <T>    void success(T str);
      void success();
 
+     void sayTime();
+
+     void line();
 }

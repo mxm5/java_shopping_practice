@@ -28,8 +28,8 @@ public class BaseService <E extends BaseEntity<ID>,ID , R extends BaseRepository
     }
 
     @Override
-    public E[] findAll() {
-        return repository.findAll();
+    public E[] readAll() {
+        return repository.readAll();
     }
 
     @Override

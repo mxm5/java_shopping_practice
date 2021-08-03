@@ -1,5 +1,8 @@
 package ir.maktab56.base.views;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public abstract class BasePage implements Page {
@@ -9,14 +12,31 @@ public abstract class BasePage implements Page {
 
     protected abstract void run();
 
-    public BasePage() {
+    public String  getPageName(){
         String[] split = getClass().getName().toUpperCase().split("\\.");
-        this.name = split[split.length - 1];
-        showTitle();
-        run();
+        return this.name = split[split.length - 1];
+    }
+
+    public void autoHeader(){
+        line();
+        String name = getPageName();
+        int x = name.length() / 2;
+        x = 50 - x;
+        print("||" + " ".repeat(x) + name + " ".repeat(x - 4) + "||");
+        line();
+    }
+
+
+
+    public BasePage() {
+
 
     }
 
+    public void defaultInit(){
+        autoHeader();
+        run();
+    }
     public BasePage(String name) {
         this.name = name;
         showTitle();
@@ -33,14 +53,18 @@ public abstract class BasePage implements Page {
 
     }
 
+    @Override
+    public void line() {
+        print("_".repeat(100));
+    }
 
     @Override
-    public void showTitle() {
-        print("_".repeat(100));
+    public void showTitle( ) {
+        line();
         int x = name.length() / 2;
         x = 50 - x;
         print("||" + " ".repeat(x) + name + " ".repeat(x - 4) + "||");
-        print("_".repeat(100));
+        line();
     }
 
     @Override
@@ -135,5 +159,15 @@ public abstract class BasePage implements Page {
 
     String enterPass(int min) {
         return input(min, "enter your password");
+    }
+
+    @Override
+    public void sayTime() {
+
+            Date date = new Date();
+            Timestamp ts = new Timestamp(date.getTime());
+            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+            System.out.print(formatter.format(ts));
+
     }
 }

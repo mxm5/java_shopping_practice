@@ -27,7 +27,7 @@ public class UserRepository extends BaseRepository<User, Long> implements UserRe
                 "  `pass` VARCHAR(45) NOT NULL,\n" +
                 "  PRIMARY KEY (`id`),\n" +
                 "  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,\n" +
-                "  UNIQUE INDEX `phoneNumber_UNIQUE` (`phoneNumber` ASC) VISIBLE,\n" +
+//                "  UNIQUE INDEX `phoneNumber_UNIQUE` (`phoneNumber` ASC) VISIBLE,\n" +
                 "  UNIQUE INDEX `userName_UNIQUE` (`userName` ASC) VISIBLE);\n";
 
         try {

@@ -17,7 +17,7 @@ public interface Repository <E extends BaseEntity<ID>,ID>{
 
     E update(E e);
 
-    E[] findAll();
+    E[] readAll();
 
     E[] findAllById(ID[] ids);
 

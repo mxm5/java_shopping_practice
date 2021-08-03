@@ -73,4 +73,16 @@ public class User extends BaseEntity<Long> {
     public void setUsrName(String usrName) {
         this.usrName = usrName;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+//                ", pass='" + pass + '\'' +
+                ", usrName='" + usrName + '\'' +
+                ", id='" + getId() + '\'' +
+                '}';
+    }
 }

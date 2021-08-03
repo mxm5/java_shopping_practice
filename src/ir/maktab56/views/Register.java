@@ -13,6 +13,9 @@ public class Register extends BasePage {
     private static final UserService service = new UserService(new UserRepository(App.connection));
 
 
+    public Register(){
+      defaultInit();
+    }
     private String pass;
     private String usrName;
     private String phone;
@@ -39,7 +42,7 @@ public class Register extends BasePage {
                 break;
             print(" passwords should match try again");
         }
-        if (input("enter your phone ( Optional ) [press y to enter phone ] ").toLowerCase().equals("y")) {
+        if (input("enter your phone ( Optional ) [press y to enter phone ] ").equalsIgnoreCase("y")) {
             while (true) {
                 phone = input(10, " enter phone number ");
                 // phone number must be less than 14 letters

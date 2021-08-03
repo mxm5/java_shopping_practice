@@ -47,7 +47,7 @@ public abstract class BaseRepository<E extends BaseEntity<ID>, ID> implements Re
     }
 
     @Override
-    public E[] findAll() {
+    public E[] readAll() {
         return null;
     }
 
