@@ -25,7 +25,6 @@ public class Login extends BasePage {
         foundUser = readUser(loggedInUser);
         if (foundUser != null) {
             success();
-            UserService.currentUser = foundUser;
             new Products(foundUser);
         } else {
             err();

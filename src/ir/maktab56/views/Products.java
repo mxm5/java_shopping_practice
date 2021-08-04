@@ -2,6 +2,7 @@ package ir.maktab56.views;
 
 import ir.maktab56.App;
 import ir.maktab56.base.views.BasePage;
+import ir.maktab56.models.Order;
 import ir.maktab56.models.Product;
 import ir.maktab56.models.User;
 import ir.maktab56.repositories.ProductRepository;
@@ -49,8 +50,8 @@ public class Products extends BasePage {
                 Product selectedProduct = allProducts[select - 1];
                 int amount = inputSelector(selectedProduct.getAmount(), "select the amount");
                 print(" you selected product");
-                UserService.currentUser = user;
-                userService.addItemToCart(selectedProduct, amount);
+                Order givenOrder = new Order(selectedProduct,user,amount);
+                userService.addItemToCart(givenOrder);// submits order and does change database
             } else break;
         }
 

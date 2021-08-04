@@ -35,14 +35,13 @@ public class UserService extends BaseService<User, Long, UserRepository> impleme
 
 
     @Override
-    public boolean addItemToCart(Product product, int amount) {
+    public boolean addItemToCart(Order order) {
 
-        Order order = new Order(product, currentUser, amount);
 
         return orderService.save(order);
     }
 
-    public static User currentUser;
+
 
 
 }
