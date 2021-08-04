@@ -9,6 +9,7 @@ public class Order extends BaseEntity<Long> {
     private Product product;
     private User user;
     private Timestamp time;
+    private int amount;
 
 public Order(){
 
@@ -17,9 +18,11 @@ public Order(){
 //    Timestamp ts = new Timestamp(date.getTime());
 //    SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
 //            System.out.print(formatter.format(ts));
-    public Order(Product product, User user){
+    public Order(Product product, User user, int amount){
         this.product = product;
         this.user = user;
+        this.amount = amount;
+
         setOrderTimeToNow();
     }
 
@@ -50,5 +53,13 @@ public Order(){
 
     public void setTime(Timestamp time) {
         this.time = time;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }

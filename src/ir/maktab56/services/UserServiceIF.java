@@ -7,6 +7,7 @@ import ir.maktab56.models.User;
 public interface UserServiceIF extends Service<User,Long> {
     boolean checkUserNameAvailable(User user);
     boolean registerNewUser(User user);
-    boolean addItemToCart( Product product);
+//    boolean addItemToCart( Product product);
 
+    boolean addItemToCart(Product product, int amount);
 }

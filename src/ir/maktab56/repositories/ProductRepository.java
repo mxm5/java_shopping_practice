@@ -28,7 +28,7 @@ public class ProductRepository extends BaseRepository<Product, Long> implements 
                 "    UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);\n";
 
         try {
-            int res = connection.createStatement().executeUpdate(sql);
+             connection.createStatement().executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -38,7 +38,7 @@ public class ProductRepository extends BaseRepository<Product, Long> implements 
 
     @Override
     public boolean insertFakeData() {
-        String[] sqls =
+        String[] sqlList =
                 {"       INSERT INTO `shopping_app`.`products` (`name`, `desc`, `price`, `amount`, `cat` ) VALUES ('iphone', 'good product', '12.00', '20' ,'electric' );\n",
                         "INSERT INTO `shopping_app`.`products` (`name`, `desc`, `price`, `amount`, `cat` ) VALUES ('nokia', 'hard product', '1.0', '20' ,'electric' );\n",
                         "INSERT INTO `shopping_app`.`products` (`name`, `desc`, `price`, `amount`, `cat` ) VALUES ('samsung', 'best product', '13.0', '20' ,'electric' );\n",
@@ -47,28 +47,38 @@ public class ProductRepository extends BaseRepository<Product, Long> implements 
                         "INSERT INTO `shopping_app`.`products` (`name`, `desc`, `price`, `amount`, `cat` ) VALUES ('oliver twist', 'nice product', '15.0', '20' ,'reading' );\n",
                         "INSERT INTO `shopping_app`.`products` (`name`, `desc`, `price`, `amount`, `cat` ) VALUES ('nike', 'best product', '13.0', '20' ,'reading' );\n",
                         "INSERT INTO `shopping_app`.`products` (`name`, `desc`, `price`, `amount`, `cat` ) VALUES ('adidas', 'good product', '23.0', '20' ,'reading' );\n",
-                        "INSERT INTO `shopping_app`.`products` (`name`, `desc`, `price`, `amount`, `cat` ) VALUES ('burbury', 'nice product', '15.0', '20' ,'reading' );\n"};
+                        "INSERT INTO `shopping_app`.`products` (`name`, `desc`, `price`, `amount`, `cat` ) VALUES ('bur bury', 'nice product', '15.0', '20' ,'reading' );\n"};
 
         try {
-            int res =1;
-            for (String sql: sqls) {
-                 res = res * connection.createStatement().executeUpdate(sql);
+            int res = 1;
+            for (String sql : sqlList) {
+                res = res * connection.createStatement().executeUpdate(sql);
             }
-            return res!=0;
+            return res != 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
 
+    @Override
+    public boolean updateRepositoryAmount(int changedAmount, Product product) {
+        int newAmount = product.getAmount() - changedAmount;
+        String sql = String.format("UPDATE `shopping_app`.`products` SET `amount` = '%d' WHERE (`id` = '%d');",
+                 newAmount,
+                product.getId()
+        );
+
+        return basicUpdate(sql);
+    }
 
 
     @Override
     public Product[] readAll() {
-        String sql="SELECT * FROM shopping_app.products;";
-        ResultSet res =basicQuery(sql);
+        String sql = "SELECT * FROM shopping_app.products;";
+        ResultSet res = basicQuery(sql);
         ArrayList<Product> products = new ArrayList<>();
-        while (true){
+        while (true) {
             try {
                 if (!res.next()) break;
                 Product p = new Product();
@@ -82,7 +92,6 @@ public class ProductRepository extends BaseRepository<Product, Long> implements 
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
         }
         return products.toArray(new Product[0]);
     }

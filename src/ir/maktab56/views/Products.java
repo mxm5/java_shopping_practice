@@ -28,28 +28,30 @@ public class Products extends BasePage {
         print(" ".repeat(10) + user.getFirstName() + " " + user.getLastName());
         print("list of products ");
         line();
-        int k =0;
+        int k = 0;
         Product[] allProducts = productService.readAll();
-        for (Product product: allProducts){
-            print("\t\t Number"+ ++k);
-            print("\t\t id :"+product.getId());
-            print("\t\t name :"+product.getProductName());
-            print("\t\t description :"+product.getDescription());
-            print("\t\t category :"+product.getCat());
-            print("\t\t price :"+product.getPrice());
-            print("\t\t stock :"+product.getAmount());
+        for (Product product : allProducts) {
+            print("\t\t Number" + ++k);
+            print("\t\t id :" + product.getId());
+            print("\t\t name :" + product.getProductName());
+            print("\t\t description :" + product.getDescription());
+            print("\t\t category :" + product.getCat());
+            print("\t\t price :" + product.getPrice());
+            print("\t\t stock :" + product.getAmount());
 
             line();
         }
 
         while (true) {
-                if(input("select a product number to order [y to select]").equalsIgnoreCase("y")) {
-                    int select = inputSelector(k, "select an item by its number");
-                    Product selectedProduct = allProducts[select - 1];
-                    print(" you selected product");
-                    UserService.currentUser = user;
-                    userService.addItemToCart(selectedProduct);
-                }else break;
+            if (input("select a product number to order [y to select]")
+                    .equalsIgnoreCase("y")) {
+                int select = inputSelector(k, "select an item by its number");
+                Product selectedProduct = allProducts[select - 1];
+                int amount = inputSelector(selectedProduct.getAmount(), "select the amount");
+                print(" you selected product");
+                UserService.currentUser = user;
+                userService.addItemToCart(selectedProduct, amount);
+            } else break;
         }
 
 

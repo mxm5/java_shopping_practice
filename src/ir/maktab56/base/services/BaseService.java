@@ -23,7 +23,7 @@ public class BaseService <E extends BaseEntity<ID>,ID , R extends BaseRepository
     }
 
     @Override
-    public E update(E e) {
+    public boolean update(E e) {
         return repository.update(e);
     }
 

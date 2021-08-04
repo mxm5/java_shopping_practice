@@ -15,7 +15,7 @@ public interface Repository <E extends BaseEntity<ID>,ID>{
 
     boolean save(E e);
 
-    E update(E e);
+    boolean update(E e);
 
     E[] readAll();
 

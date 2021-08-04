@@ -5,4 +5,7 @@ import ir.maktab56.models.Product;
 
 public interface ProductRepositoryIF extends Repository<Product,Long> {
     boolean insertFakeData();
+
+    boolean updateRepositoryAmount(int changedAmount , Product product);
+
 }

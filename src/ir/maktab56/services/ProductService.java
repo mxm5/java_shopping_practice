@@ -13,4 +13,10 @@ public class ProductService extends BaseService<Product,Long, ProductRepository>
     public Product[] readAll() {
         return super.readAll();
     }
+
+
+    @Override
+    public boolean updateRepositoryAmount(int changedAmount, Product product) {
+        return repository.updateRepositoryAmount(changedAmount,product);
+    }
 }

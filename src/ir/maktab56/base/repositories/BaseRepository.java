@@ -52,8 +52,8 @@ public abstract class BaseRepository<E extends BaseEntity<ID>, ID> implements Re
     }
 
     @Override
-    public E update(E e) {
-        return null;
+    public boolean update(E e) {
+        return false;
     }
 
     @Override
