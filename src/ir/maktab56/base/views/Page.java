@@ -12,6 +12,7 @@ public interface Page {
     int input(int max);
 
     <T> void print(T s);
+    <T> void print();
 
     String input(String msg);
 

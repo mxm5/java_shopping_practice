@@ -124,6 +124,12 @@ public abstract class BasePage implements Page {
     }
 
     @Override
+    public <T> void print() {
+        System.out.println();
+    }
+
+
+    @Override
     public String input(String msg) {
         System.out.print(msg + " : ");
         return new Scanner(System.in).next();
