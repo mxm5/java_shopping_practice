@@ -10,5 +10,5 @@ public interface UserServiceIF extends Service<User,Long> {
     boolean registerNewUser(User user);
 //    boolean addItemToCart( Product product);
 
-    boolean addItemToCart(Order order);
+    boolean placeAnOrder(Order order);
 }

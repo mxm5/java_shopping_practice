@@ -7,13 +7,16 @@ import ir.maktab56.models.Product;
 import ir.maktab56.models.User;
 import ir.maktab56.repositories.ProductRepository;
 import ir.maktab56.repositories.UserRepository;
+import ir.maktab56.services.CartService;
 import ir.maktab56.services.ProductService;
 import ir.maktab56.services.UserService;
 
 public class Products extends BasePage {
     private final User user;
+
     private static final ProductService productService = new ProductService(new ProductRepository(App.connection));
-    private static final UserService userService = new UserService(new UserRepository(App.connection));
+
+    private static final CartService cartService = new CartService();
 
     public Products(User user) {
         this.user = user;
@@ -44,16 +47,34 @@ public class Products extends BasePage {
         }
 
         while (true) {
-            if (input("select a product number to order [y to select]")
+            if (input("select a product number from list \n" +
+                    "[ (y) to select a product] \n " +
+                    "[or any key to view cart]").strip()
                     .equalsIgnoreCase("y")) {
                 int select = inputSelector(k, "select an item by its number");
                 Product selectedProduct = allProducts[select - 1];
-                int amount = inputSelector(selectedProduct.getAmount(), "select the amount");
-                print(" you selected product");
-                Order givenOrder = new Order(selectedProduct,user,amount);
-                userService.addItemToCart(givenOrder);// submits order and does change database
-            } else break;
+
+                print(" you selected product : [ "+selectedProduct.getProductName() + " ]");
+                String opt= input(
+                        "[ press ( a ) to add product to cart] \n " +
+                                "[or ( r ) key to remove product from cart]");
+
+                if (opt.strip().equalsIgnoreCase("a")) {
+                    int amount = inputSelector(selectedProduct.getAmount(), "select the amount");
+                    Order givenOrder = new Order(selectedProduct, user, amount);
+                    print(cartService.addProductToCart(givenOrder));}
+                else  if (opt .equalsIgnoreCase("r")){
+                    print(cartService.removeProductFromCart(selectedProduct));
+                }else {
+                    print("invalid input");
+                }
+
+            } else {
+                new Cart(cartService,user);
+                break;
+            }
         }
+
 
 
     }

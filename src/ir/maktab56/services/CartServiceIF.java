@@ -5,13 +5,12 @@ import ir.maktab56.models.Product;
 
 public interface CartServiceIF {
 
-    void  initOtherServices();
 
     Double calculateOrdersTotalCost(Order order);
 
     String addProductToCart(Order order);
 
-    String removeProductFromCart(Order order);
+    String removeProductFromCart(Product product);
 
     boolean submitAllCartOrders();
 

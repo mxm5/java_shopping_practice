@@ -35,8 +35,7 @@ public class UserService extends BaseService<User, Long, UserRepository> impleme
 
 
     @Override
-    public boolean addItemToCart(Order order) {
-
+    public boolean placeAnOrder(Order order) {
 
         return orderService.save(order);
     }
